@@ -1,55 +1,73 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
 
-func main(){
-	
-	Menu();
-	intArray := []int64{1, 2, 3, 4, 5}
-	PrintArray(intArray)	
+	U "./lib"
+)
+
+func main() {
+	Menu()
 }
 
-func Menu(){
+//Function for handle the main menu
+func Menu() {
 
-	var option int	
+	var option int
+	var optionStr string
+
 	PrintOptions()
 
-	for ok := true; ok; ok = (option!=7) {
-		fmt.Printf("Select the option");		
-		fmt.Scanf("%d\n", &option);
-		switch option {
-        case 1:
-        	fmt.Println("1")
-			//push();
-        case 2:
-        	fmt.Println("2")
-			//pop();
-        case 3:
-        	fmt.Println("3")
-			//print();
-        case 4:
-        	fmt.Println("4")
-			//find_by_index();
-        case 5:
-        	fmt.Println("5")
-			//find_by_value();
-        case 6:
-        	fmt.Println("6")
-			//sort();
-        case 7:
-            fmt.Println("\n<EXIT>\n\n")
-        default:
-            fmt.Println("\n\t<Invalid option selected>")
+	for ok := true; ok; ok = (option != 8) {
+		fmt.Printf("Select an option: ")
+		fmt.Scanf("%s\n", &optionStr)
+		if U.IsNumber(optionStr) {
+
+			option, _ := strconv.ParseInt(optionStr, 10, 0)
+			switch option {
+			case 1:
+				a := U.CreateArray()
+				U.PrintArray(a)
+				//push();
+			case 2:
+				fmt.Println("2")
+				//pop();
+			case 3:
+				fmt.Println("3")
+				//print();
+			case 4:
+				fmt.Println("4")
+				//find_by_index();
+			case 5:
+				fmt.Println("5")
+				//find_by_value();
+			case 6:
+				fmt.Println("6")
+				//sort();
+			case 7:
+				fmt.Println("6")
+				//sort();
+			case 8:
+				fmt.Println("\n<EXIT>\n\n")
+				return
+			default:
+				fmt.Println("\n\t<Invalid option selected. Please, try again>")
+				PrintOptions()
+			}
+		} else {
+			fmt.Println("\n\t<Invalid value. Please, try again>")
+			PrintOptions()
 		}
 	}
 
 }
 
-func PrintOptions(){
+func PrintOptions() {
 	fmt.Println("\n=======================")
 	fmt.Println(" Arrays examples in Go ")
 	fmt.Println("=======================")
-	fmt.Println("\n 1.PUSH\n 2.POP\n 3.DISPLAY\n 4.FIND BY INDEX\n 5.FIND BY VALUE\n 6.SORT\n 7.EXIT \n")
+	fmt.Println("\n1. INITIALIZE\n 2.PUSH\n 3.POP\n 4.DISPLAY\n 5.FIND BY INDEX\n 6.FIND BY VALUE\n 7.SORT\n 8.EXIT \n")
 }
 
 func PrintArray(array []int64) {
