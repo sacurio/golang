@@ -4,30 +4,32 @@ import (
 	"fmt"
 )
 
-func CreateArray() []int {
+type A struct {
+	Arr []int
+	L   int
+}
+
+func CreateArray() *A {
 
 	var l int
+	var a *A
+
 	fmt.Println("Input the length of the array: ")
 	fmt.Scanf("%d", &l)
 
-	return ResizeArray([]int{}, l)
-
+	fmt.Println("\nInitializing...")
+	a.L = l
+	ResizeArray(a)
+	return a
 }
 
-func ResizeArray(a []int, l int) []int {
-
-	return make([]int, len(a)+l)
-
+func ResizeArray(a *A) {
+	r := make([]int, a.L)
+	a.Arr = r
 }
 
-func PrintArray(a []int) {
-	fmt.Println(printArray(a))
-}
-
-func printArray(a []int) string {
-	//var b bytes.Buffer
-	for i, element := range a {
-		fmt.Println(i, ":", element)
+func PrintArray(a *A) {
+	for i, element := range a.Arr {
+		fmt.Printf("arr[%d] = %d\n", i, element)
 	}
-	return "b.String()"
 }

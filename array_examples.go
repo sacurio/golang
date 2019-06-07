@@ -16,10 +16,10 @@ func Menu() {
 
 	var option int
 	var optionStr string
-
-	PrintOptions()
+	var a *U.A
 
 	for ok := true; ok; ok = (option != 8) {
+		PrintOptions()
 		fmt.Printf("Select an option: ")
 		fmt.Scanf("%s\n", &optionStr)
 		if U.IsNumber(optionStr) {
@@ -27,8 +27,8 @@ func Menu() {
 			option, _ := strconv.ParseInt(optionStr, 10, 0)
 			switch option {
 			case 1:
-				a := U.CreateArray()
-				U.PrintArray(a)
+				a = U.CreateArray()
+				U.PrintArray(a.Arr)
 				//push();
 			case 2:
 				fmt.Println("2")
@@ -67,7 +67,7 @@ func PrintOptions() {
 	fmt.Println("\n=======================")
 	fmt.Println(" Arrays examples in Go ")
 	fmt.Println("=======================")
-	fmt.Println("\n1. INITIALIZE\n 2.PUSH\n 3.POP\n 4.DISPLAY\n 5.FIND BY INDEX\n 6.FIND BY VALUE\n 7.SORT\n 8.EXIT \n")
+	fmt.Println("\n 1.INITIALIZE\n 2.PUSH\n 3.POP\n 4.DISPLAY\n 5.FIND BY INDEX\n 6.FIND BY VALUE\n 7.SORT\n 8.EXIT \n")
 }
 
 func PrintArray(array []int64) {

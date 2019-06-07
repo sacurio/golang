@@ -32,8 +32,10 @@ clean:
 		rm -f $(HELLO_UNIX)
 run:
 		@echo " > Running code..."
-		$(GOBUILD) -o $(HELLO_PROG) -v ./...
-		./$(HELLO_PROG)
+		./$(ARRAY_PROG)
+
+array-run: clean array run
+
 
 #Cross compilation
 build-linux:
