@@ -18,7 +18,7 @@ func Menu() {
 	var optionStr string
 	var a *U.A
 
-	for ok := true; ok; ok = (option != 8) {
+	for ok := true; ok; ok = (option != 11) {
 		PrintOptions()
 		fmt.Printf("Select an option: ")
 		fmt.Scanf("%s\n", &optionStr)
@@ -28,20 +28,15 @@ func Menu() {
 			switch option {
 			case 1:
 				a = U.CreateArray()
-				fmt.Println(a)
 				U.PrintArray(a)
-				//push();
 			case 2:
-				fmt.Println("2")
-				fmt.Println("*********************\n")
+				U.AppendToArray(a)
 				U.PrintArray(a)
-				//pop();
 			case 3:
-				fmt.Println("3")
-				//print();
+				U.PopArray(a)
+				U.PrintArray(a)
 			case 4:
-				fmt.Println("4")
-				//find_by_index();
+				U.FindByIndexArray(a)
 			case 5:
 				fmt.Println("5")
 				//find_by_value();
@@ -52,6 +47,10 @@ func Menu() {
 				fmt.Println("6")
 				//sort();
 			case 8:
+				U.PrintArray(a)
+			case 9:
+				//SORT
+			case 10:
 				fmt.Println("\n<EXIT>\n\n")
 				return
 			default:
@@ -70,7 +69,7 @@ func PrintOptions() {
 	fmt.Println("\n=======================")
 	fmt.Println(" Arrays examples in Go ")
 	fmt.Println("=======================")
-	fmt.Println("\n 1.INITIALIZE\n 2.PUSH\n 3.POP\n 4.DISPLAY\n 5.FIND BY INDEX\n 6.FIND BY VALUE\n 7.SORT\n 8.EXIT \n")
+	fmt.Println("\n 1.INITIALIZE\n 2.PUSH\n 3.POP\n 4.FIND BY INDEX\n 5.INSERTAT\n 6.DELETEAT\n 7.FIND BY VALUE\n 9.SORT\n 10.PRINT\n 11.EXIT \n")
 }
 
 func PrintArray(array []int64) {
