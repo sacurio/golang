@@ -14,6 +14,8 @@ func CreateArray() *A {
 	var l int
 	var a *A
 
+	a = new(A)
+
 	fmt.Println("Input the length of the array: ")
 	fmt.Scanf("%d", &l)
 
@@ -25,6 +27,7 @@ func CreateArray() *A {
 
 func ResizeArray(a *A) {
 	r := make([]int, a.L)
+	copy(r, a.Arr)
 	a.Arr = r
 }
 

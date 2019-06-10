@@ -28,10 +28,13 @@ func Menu() {
 			switch option {
 			case 1:
 				a = U.CreateArray()
-				U.PrintArray(a.Arr)
+				fmt.Println(a)
+				U.PrintArray(a)
 				//push();
 			case 2:
 				fmt.Println("2")
+				fmt.Println("*********************\n")
+				U.PrintArray(a)
 				//pop();
 			case 3:
 				fmt.Println("3")
