@@ -86,7 +86,6 @@ func PrintOptions(a *U.A) {
 	fmt.Println("\n=======================")
 	fmt.Println(" Arrays examples in Go ")
 	fmt.Println("=======================")
-	//fmt.Println("\n  1. INITIALIZE\n  2. PUSH\n  3. POP\n  4. FIND BY INDEX\n  5. FIND BY VALUE\n  6. INSERTAT\n  7. DELETEAT\n  8. SORT\n  9. PRINT\n 10. EXIT \n")
 	if a == nil {
 		fmt.Println("\n  1. INITIALIZE\n 10. EXIT\n")
 	} else {
