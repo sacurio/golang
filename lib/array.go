@@ -51,15 +51,18 @@ func resizeArray(l int, a *A) {
 
 func AppendToArray(a *A) {
 	var e string
+	var v bool
 
-	fmt.Println("  :: Input the element to be append >> ")
-	fmt.Scanf("%s", &e)
-	if IsNumber(e) {
-		i, _ := strconv.Atoi(e)
-		appendToArray(i, a)
-	} else {
-		fmt.Println("<The value entered is not correct. Please, try again>")
-		AppendToArray(a)
+	for ok := true; ok; ok = (v == false) {
+		fmt.Println("  :: Input the element to be append >> ")
+		fmt.Scanf("%s", &e)
+		v = IsNumber(e)
+		if v {
+			i, _ := strconv.Atoi(e)
+			appendToArray(i, a)
+		} else {
+			fmt.Println("<The value entered is not correct. Please, try again>")
+		}
 	}
 }
 
