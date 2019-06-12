@@ -19,8 +19,8 @@ func Menu() {
 	var a *U.A
 
 	for ok := true; ok; ok = (option != 11) {
-		PrintOptions()
-		fmt.Printf("Select an option: ")
+		PrintOptions(a)
+		fmt.Printf(":: Select an option >> ")
 		fmt.Scanf("%s\n", &optionStr)
 		if U.IsNumber(optionStr) {
 
@@ -30,48 +30,74 @@ func Menu() {
 				a = U.CreateArray()
 				U.PrintArray(a)
 			case 2:
-				U.AppendToArray(a)
-				U.PrintArray(a)
+				if ControlMenu(a) {
+					U.AppendToArray(a)
+					U.PrintArray(a)
+				}
 			case 3:
-				U.PopArray(a)
-				U.PrintArray(a)
+				if ControlMenu(a) {
+					U.PopArray(a)
+					U.PrintArray(a)
+				}
 			case 4:
-				U.FindByIndexArray(a)
+				if ControlMenu(a) {
+					U.FindByIndexArray(a)
+				}
 			case 5:
-				fmt.Println("5")
-				//find_by_value();
+				if ControlMenu(a) {
+					U.FindByValueArray(a)
+				}
 			case 6:
-				fmt.Println("6")
-				//sort();
+				if ControlMenu(a) {
+					U.InsertAtIndex(a)
+					U.PrintArray(a)
+				}
 			case 7:
-				fmt.Println("6")
+				if ControlMenu(a) {
+					U.DeleteAtIndex(a)
+					U.PrintArray(a)
+				}
 				//sort();
 			case 8:
-				U.PrintArray(a)
+				if ControlMenu(a) {
+					U.SortIndex(a)
+					U.PrintArray(a)
+				}
 			case 9:
-				//SORT
+				if ControlMenu(a) {
+					U.PrintArray(a)
+				}
 			case 10:
 				fmt.Println("\n<EXIT>\n\n")
 				return
 			default:
 				fmt.Println("\n\t<Invalid option selected. Please, try again>")
-				PrintOptions()
+				PrintOptions(a)
 			}
 		} else {
 			fmt.Println("\n\t<Invalid value. Please, try again>")
-			PrintOptions()
+			PrintOptions(a)
 		}
 	}
 
 }
 
-func PrintOptions() {
+func PrintOptions(a *U.A) {
 	fmt.Println("\n=======================")
 	fmt.Println(" Arrays examples in Go ")
 	fmt.Println("=======================")
-	fmt.Println("\n 1.INITIALIZE\n 2.PUSH\n 3.POP\n 4.FIND BY INDEX\n 5.INSERTAT\n 6.DELETEAT\n 7.FIND BY VALUE\n 9.SORT\n 10.PRINT\n 11.EXIT \n")
+	//fmt.Println("\n  1. INITIALIZE\n  2. PUSH\n  3. POP\n  4. FIND BY INDEX\n  5. FIND BY VALUE\n  6. INSERTAT\n  7. DELETEAT\n  8. SORT\n  9. PRINT\n 10. EXIT \n")
+	if a == nil {
+		fmt.Println("\n  1. INITIALIZE\n 10. EXIT\n")
+	} else {
+		fmt.Println("  2. PUSH\n  3. POP\n  4. FIND BY INDEX\n  5. FIND BY VALUE\n  6. INSERTAT\n  7. DELETEAT\n  8. SORT\n  9. PRINT\n 10. EXIT \n")
+	}
 }
 
-func PrintArray(array []int64) {
-	fmt.Println(array)
+func ControlMenu(a *U.A) bool {
+	if a == nil {
+		fmt.Println("<Invalid menu option>")
+		return false
+	}
+	return true
 }
