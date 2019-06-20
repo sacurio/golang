@@ -8,18 +8,18 @@ import (
 )
 
 func main() {
-	Menu()
+	renderMenu()
 }
 
 //Function for handle the main menu
-func Menu() {
+func renderMenu() {
 
 	var option int
 	var optionStr string
-	var a *U.A
+	var ca *U.CustomArray
 
 	for ok := true; ok; ok = (option != 11) {
-		PrintOptions(a)
+		PrintOptions(ca)
 		fmt.Printf(":: Select an option >> ")
 		fmt.Scanf("%s\n", &optionStr)
 		if U.IsNumber(optionStr) {
@@ -27,62 +27,63 @@ func Menu() {
 			option, _ := strconv.ParseInt(optionStr, 10, 0)
 			switch option {
 			case 1:
-				a = U.CreateArray()
-				U.PrintArray(a)
+				ca = U.CreateArray()
+				U.PrintArray(ca)
 			case 2:
-				if ControlMenu(a) {
-					U.AppendToArray(a)
-					U.PrintArray(a)
+				if ControlMenu(ca) {
+					U.AppendToArray(ca)
+					U.PrintArray(ca)
 				}
 			case 3:
-				if ControlMenu(a) {
-					U.PopArray(a)
-					U.PrintArray(a)
+				if ControlMenu(ca) {
+					U.PopArray(ca)
+					U.PrintArray(ca)
 				}
 			case 4:
-				if ControlMenu(a) {
-					U.FindByIndexArray(a)
+				if ControlMenu(ca) {
+					U.FindByIndexArray(ca)
 				}
 			case 5:
-				if ControlMenu(a) {
-					U.FindByValueArray(a)
+				if ControlMenu(ca) {
+					U.FindByValueArray(ca)
 				}
 			case 6:
-				if ControlMenu(a) {
-					U.InsertAtIndex(a)
-					U.PrintArray(a)
+				if ControlMenu(ca) {
+					U.InsertAtIndex(ca)
+					U.PrintArray(ca)
 				}
 			case 7:
-				if ControlMenu(a) {
-					U.DeleteAtIndex(a)
-					U.PrintArray(a)
+				if ControlMenu(ca) {
+					U.DeleteAtIndex(ca)
+					U.PrintArray(ca)
 				}
 				//sort();
 			case 8:
-				if ControlMenu(a) {
-					U.SortIndex(a)
-					U.PrintArray(a)
+				if ControlMenu(ca) {
+					U.SortIndex(ca)
+					U.PrintArray(ca)
 				}
 			case 9:
-				if ControlMenu(a) {
-					U.PrintArray(a)
+				if ControlMenu(ca) {
+					U.PrintArray(ca)
 				}
 			case 10:
 				fmt.Println("\n<EXIT>\n\n")
 				return
 			default:
 				fmt.Println("\n\t<Invalid option selected. Please, try again>")
-				PrintOptions(a)
+				PrintOptions(ca)
 			}
 		} else {
 			fmt.Println("\n\t<Invalid value. Please, try again>")
-			PrintOptions(a)
+			PrintOptions(ca)
 		}
 	}
 
 }
 
-func PrintOptions(a *U.A) {
+//Function that prints the menu options.
+func PrintOptions(a *U.CustomArray) {
 	fmt.Println("\n=======================")
 	fmt.Println(" Arrays examples in Go ")
 	fmt.Println("=======================")
@@ -93,8 +94,9 @@ func PrintOptions(a *U.A) {
 	}
 }
 
-func ControlMenu(a *U.A) bool {
-	if a == nil {
+//Function for controlling if a CustomArray struct exists in order to select the correct menu option
+func ControlMenu(ca *U.CustomArray) bool {
+	if ca == nil {
 		fmt.Println("<Invalid menu option>")
 		return false
 	}

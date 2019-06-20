@@ -8,88 +8,95 @@ import (
 
 //========STRUCTS========
 
-type A struct {
+type CustomArray struct {
 	Arr []int
-	L   int
-	P   int
+	Lng int //Array length
+	Ptr int //Array pointer
 }
 
 //========STRUCTS========
 
 //========INITIALIZE ARRAY========
 
-func CreateArray() *A {
-	var l int
-	var a *A
-	a = new(A)
+//Exportable fuction that initalize an array
+func CreateArray() *CustomArray {
+	var lng int
+	var ca *CustomArray
+	ca = new(CustomArray)
 
 	fmt.Println("\nInitializing...")
-	a.L = l
-	a.P = 0
-	resizeArray(0, a)
-	return a
+	ca.Lng = lng
+	ca.Ptr = 0
+	resizeArray(0, ca)
+	return ca
 }
 
 //========INITIALIZE ARRAY========
 
 //========RESIZE========
 
-func ResizeArray(a *A) {
-	resizeArray(a.L+1, a)
+//Exportable function that resize an existing array
+func ResizeArray(ca *CustomArray) {
+	resizeArray(ca.Lng+1, ca)
 }
 
-func resizeArray(l int, a *A) {
-	r := make([]int, l)
-	copy(r, a.Arr)
-	a.L = l
-	a.Arr = r
+//Function that resize an existing array
+func resizeArray(lng int, ca *CustomArray) {
+	newarr := make([]int, lng)
+	copy(newarr, ca.Arr)
+	ca.Lng = lng
+	ca.Arr = newarr
 }
 
 //========RESIZE========
 
 //========APPEND========
 
-func AppendToArray(a *A) {
-	var e string
-	var v bool
+//Exportable function that append an element entered by user to an existing array.
+func AppendToArray(ca *CustomArray) {
+	var entry string
+	var valid bool
 
-	for ok := true; ok; ok = (v == false) {
+	for ok := true; ok; ok = (valid == false) {
 		fmt.Println("  :: Input the element to be append >> ")
-		fmt.Scanf("%s", &e)
-		v = IsNumber(e)
-		if v {
-			i, _ := strconv.Atoi(e)
-			appendToArray(i, a)
+		fmt.Scanf("%s", &entry)
+		valid = IsNumber(entry)
+		if valid {
+			i, _ := strconv.Atoi(entry)
+			appendToArray(i, ca)
 		} else {
 			fmt.Println("<The value entered is not correct. Please, try again>")
 		}
 	}
 }
 
-func appendToArray(element int, a *A) {
+//Function that append an element entered to an existing array.
+func appendToArray(element int, ca *CustomArray) {
 
-	var s = [1]int{element}
-	var c = len(a.Arr) + 1
-	if a.P <= c {
-		resizeArray(len(a.Arr)+1, a)
+	var slide = [1]int{element}
+	var capicity = len(ca.Arr) + 1
+	if ca.Ptr <= capicity {
+		resizeArray(len(ca.Arr)+1, ca)
 	}
-	copy(a.Arr[a.P:len(a.Arr)], s[0:1])
-	a.P++
+	copy(ca.Arr[ca.Ptr:len(ca.Arr)], slide[0:1])
+	ca.Ptr++
 }
 
 //========APPEND========
 
 //========POP========
 
-func PopArray(a *A) {
-	popArray(a)
+//Exportable function that remove the last element in an array.
+func PopArray(ca *CustomArray) {
+	popArray(ca)
 }
 
-func popArray(a *A) {
-	var l = len(a.Arr) - 1
-	if l >= 0 {
-		resizeArray(l, a)
-		a.P--
+//Function that remove the last element in an array.
+func popArray(ca *CustomArray) {
+	var lng = len(ca.Arr) - 1
+	if lng >= 0 {
+		resizeArray(lng, ca)
+		ca.Ptr--
 	} else {
 		fmt.Println("<Index out of bounds>")
 	}
@@ -99,23 +106,25 @@ func popArray(a *A) {
 
 //========FIND BY INDEX ========
 
-func FindByIndexArray(a *A) {
-	var i string
+//Exportable function that finds an element into the array by the index value entered by the user and print in screen the result.
+func FindByIndexArray(ca *CustomArray) {
+	var index string
 
 	fmt.Println("  :: Input the insert to be search >> ")
-	fmt.Scanf("%s", &i)
-	if IsNumber(i) {
-		j, _ := strconv.Atoi(i)
-		findByIndexArray(j, a)
+	fmt.Scanf("%s", &index)
+	if IsNumber(index) {
+		indexInt, _ := strconv.Atoi(index)
+		findByIndexArray(indexInt, ca)
 	} else {
 		fmt.Println("<The value entered is not correct. Please, try again>")
 	}
 }
 
-func findByIndexArray(j int, a *A) {
-	if j >= 0 && j < a.L {
-		for i, element := range a.Arr {
-			if i == j {
+//Function that finds an element into the array by the index and print in screen the result.
+func findByIndexArray(index int, ca *CustomArray) {
+	if index >= 0 && index < ca.Lng {
+		for i, element := range ca.Arr {
+			if i == index {
 				fmt.Printf("  :: Element found arr[%d] = %d :: \n", i, element)
 				return
 			}
@@ -130,26 +139,28 @@ func findByIndexArray(j int, a *A) {
 
 //========FIND BY VALUE ========
 
-func FindByValueArray(a *A) {
-	var i string
+//Exportable function that finds an element into the array by the value value entered by the user and print in screen the result.
+func FindByValueArray(ca *CustomArray) {
+	var value string
 
 	fmt.Println("  :: Input the value to be search in the Array >> ")
-	fmt.Scanf("%s", &i)
-	if IsNumber(i) {
-		j, _ := strconv.Atoi(i)
-		findByValueArray(j, a)
+	fmt.Scanf("%s", &value)
+	if IsNumber(value) {
+		valueInt, _ := strconv.Atoi(value)
+		findByValueArray(valueInt, ca)
 	} else {
 		fmt.Println("<The value entered is not correct. Please, try again>")
-		AppendToArray(a)
+		AppendToArray(ca)
 	}
 }
 
-func findByValueArray(j int, a *A) {
-	var b *A
-	b = new(A)
+//Function that finds an element into the array by the index value entered by the user and print in screen the result(s).
+func findByValueArray(value int, ca *CustomArray) {
+	var b *CustomArray
+	b = new(CustomArray)
 	resizeArray(0, b)
-	for _, element := range a.Arr {
-		if element == j {
+	for _, element := range ca.Arr {
+		if element == value {
 			appendToArray(element, b)
 		}
 	}
@@ -157,7 +168,7 @@ func findByValueArray(j int, a *A) {
 		fmt.Printf("\n:: %d elements founded ::\n\n", len(b.Arr))
 		printArray(b.Arr)
 	} else {
-		fmt.Printf("<No values founded for value: %d\n>", j)
+		fmt.Printf("<No values founded for value: %d\n>", value)
 	}
 
 }
@@ -166,32 +177,34 @@ func findByValueArray(j int, a *A) {
 
 //========INSERT AT========
 
-func InsertAtIndex(a *A) {
+//Exportable function that inserts a value in an existing array in the index position entered by the user.
+func InsertAtIndex(ca *CustomArray) {
 
-	var i, v string
+	var index, value string
 
 	fmt.Println("  :: Input the index and value to insert >> ")
-	fmt.Scanf("%s", &i)
+	fmt.Scanf("%s", &index)
 	fmt.Println("  :: Input the value and value to insert >> ")
-	fmt.Scanf("%s", &v)
-	if IsNumber(i) && IsNumber(v) {
-		i, _ := strconv.Atoi(i)
-		v, _ := strconv.Atoi(v)
-		insertAtIndex(i, v, a)
+	fmt.Scanf("%s", &value)
+	if IsNumber(index) && IsNumber(value) {
+		indexInt, _ := strconv.Atoi(index)
+		valueInt, _ := strconv.Atoi(value)
+		insertAtIndex(indexInt, valueInt, ca)
 	} else {
 		fmt.Println("<Exists an error with the type of the values entereds>")
 	}
 
 }
 
-func insertAtIndex(i int, v int, a *A) {
-	if i >= 0 && i < len(a.Arr) {
-		l := make([]int, i)
-		copy(l, a.Arr[0:i])
-		l = append(l, v)
-		l = append(l, a.Arr[i:]...)
-		a.Arr = l
-		a.P++
+//Function that inserts a value in an array in the index position.
+func insertAtIndex(index int, value int, ca *CustomArray) {
+	if index >= 0 && index < len(ca.Arr) {
+		slide := make([]int, index)
+		copy(slide, ca.Arr[0:index])
+		slide = append(slide, value)
+		slide = append(slide, ca.Arr[index:]...)
+		ca.Arr = slide
+		ca.Ptr++
 	} else {
 		fmt.Println("<The index out of bounds>")
 	}
@@ -201,27 +214,29 @@ func insertAtIndex(i int, v int, a *A) {
 
 //========DELETE AT========
 
-func DeleteAtIndex(a *A) {
+//Exportable function that remove an element in an existing array by the index entered by the user.
+func DeleteAtIndex(ca *CustomArray) {
 
-	var i, v string
+	var index, value string
 
 	fmt.Println("  :: Input the index to be delete >> ")
-	fmt.Scanf("%s", &i)
-	if IsNumber(i) && IsNumber(v) {
-		i, _ := strconv.Atoi(i)
-		deleteAtIndex(i, a)
+	fmt.Scanf("%s", &index)
+	if IsNumber(index) && IsNumber(value) {
+		indexInt, _ := strconv.Atoi(index)
+		deleteAtIndex(indexInt, ca)
 	} else {
 		fmt.Println("<Exists an error with the type of the values entereds>")
 	}
 
 }
 
-func deleteAtIndex(i int, a *A) {
-	if i >= 0 && i < len(a.Arr) {
-		l := make([]int, len(a.Arr)-1)
-		l = append(a.Arr[:i], a.Arr[i+1:]...)
-		a.Arr = l
-		a.P--
+//Function that inserts a value in an existing array in the index position.
+func deleteAtIndex(index int, ca *CustomArray) {
+	if index >= 0 && index < len(ca.Arr) {
+		slide := make([]int, len(ca.Arr)-1)
+		slide = append(ca.Arr[:index], ca.Arr[index+1:]...)
+		ca.Arr = slide
+		ca.Ptr--
 	} else {
 		fmt.Println("<The index out of bounds>")
 	}
@@ -231,27 +246,31 @@ func deleteAtIndex(i int, a *A) {
 
 //========SORT=======
 
-func SortIndex(a *A) {
+//Exportable function that sorts the elements of the array using the bubble sorting algorithm.
+func SortIndex(ca *CustomArray) {
 
-	sortIndex(a)
+	sortIndex(ca)
 
 }
 
-func sortIndex(a *A) {
-	s := make([]int, len(a.Arr))
-	copy(s, a.Arr)
-	sort.Ints(s)
-	a.Arr = s
+//Function that sorts the elements of the array using the bubble sorting algorithm.
+func sortIndex(ca *CustomArray) {
+	slide := make([]int, len(ca.Arr))
+	copy(slide, ca.Arr)
+	sort.Ints(slide)
+	ca.Arr = slide
 }
 
 //========SORT=======
 
 //========PRINT========
 
-func PrintArray(a *A) {
-	printArray(a.Arr)
+//Exportable function that prints in screen the elements of the current array.
+func PrintArray(ca *CustomArray) {
+	printArray(ca.Arr)
 }
 
+//Function that prints in screen the elements of the current array.
 func printArray(ar []int) {
 	if len(ar) > 0 {
 		for i, element := range ar {
