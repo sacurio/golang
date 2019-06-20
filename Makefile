@@ -2,7 +2,6 @@ GOCMD=go
 GOBUILD=$(GOCMD) build
 GOCLEAN=$(GOCMD) clean
 GOTEST=$(GOCMD) test
-GOGET=$(GOCMD) get
 
 HELLO_PROG=hello_world
 HELLO_UNIX=$(HELLO_PROG)_unix
